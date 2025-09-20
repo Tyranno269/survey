@@ -1,0 +1,12 @@
+<%= tag.div(flash[:alert],  style: "color:red")   if flash[:alert] %>
+<%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
+<% if authenticated? %>
+  <h1>ようこそ <%= current_user.email_address %> さん</h1>
+<% else %>
+  <h1>ようこそ</h1>
+<% end %>
+
+<div style="margin-top: 1rem;">
+  <%= button_to "ログアウト", session_path, method: :delete, form: { data: { turbo_confirm: "ログアウトしますか？" } } %>
+</div>
