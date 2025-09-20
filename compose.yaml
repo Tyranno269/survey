@@ -1,0 +1,12 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    tty: true
+    volumes:
+      - .:/survey
+    ports:
+      - "3000:3000"
+    environment:
+      - TZ=Asia/Tokyo

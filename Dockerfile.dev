@@ -1,0 +1,17 @@
+FROM ruby:3.5.0-preview1
+
+WORKDIR /survey
+COPY . .
+RUN bundle install
+
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y \
+    build-essential default-libmysqlclient-dev git pkg-config \
+    vim curl
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
